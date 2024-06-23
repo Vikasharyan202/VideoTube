@@ -1,20 +1,23 @@
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { closedSidebar, toggleSidebar } from "../utils/navbarSlice";
+import { useDispatch } from "react-redux";
 
 const Sidebar = () => {
     const isNavbarOpen = useSelector((store) => store.navbar.isNavbarOpen);
+    const isSidebarOpen = useSelector((store) => store.navbar.isSidebarOpen);
 
-    if(!isNavbarOpen) return (
-        <div className="flex flex-col items-center">
-            <button className="flex flex-col justify-center items-center gap-1 h-20 w-16 hover:bg-slate-100 hover:rounded-lg"><img className="w-4" alt="home" src="https://i.pinimg.com/564x/ed/bc/bb/edbcbb66b41eb9570c7b2eeb011b7eb8.jpg" /><span className="text-xs">Home</span></button>
-            <button className="flex flex-col justify-center items-center gap-1 h-20 w-16 hover:bg-slate-100 hover:rounded-lg"><img className="w-4" alt="shorts" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHvfNPT_G_NuKyV_RyyiTGqOtp3OBZxme25A&s" /><span className="text-xs">Shorts</span></button>
-            <button className="flex flex-col justify-center items-center gap-1 h-20 w-auto hover:bg-slate-100 hover:rounded-lg"><img className="w-4" alt="subscription" src="https://cdn.iconscout.com/icon/free/png-256/free-subscriptions-1780185-1513025.png" /><span className="text-xs">Subscriptions</span></button>
-            <button className="flex flex-col justify-center items-center gap-1 h-20 w-16 hover:bg-slate-100 hover:rounded-lg"><img className="w-4" alt="you" src="https://a0.anyrgb.com/pngimg/1376/154/youtube-play-button-8k-resolution-youtuber-youtube-blog-video-logos-triangle-rectangle-black.png"/><span className="text-xs">You</span></button>
-        </div>
-    );
+    const dispatch = useDispatch();
 
-    return(
+    function handleSidebar() {
+        dispatch(closedSidebar());
+        dispatch(toggleSidebar());
+    }
+
+    if(isNavbarOpen) return(
         <div className="w-48 border border-blue-500 ">
             <div className="flex flex-col gap-3 ml-3"> 
+                <Link to='/' onClick={handleSidebar}><button>Home</button></Link>
                 <h3 className="font-bold">You &gt; </h3>
                 <button className="flex items-center gap-2 h-10 hover:bg-slate-100 hover:rounded-lg"><img className="w-6" alt="user" src="https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png"/><span>Your channel</span></button>
                 <button className="flex items-center gap-2 h-10 hover:bg-slate-100 hover:rounded-lg"><img className="w-6" alt="History" src="https://static-00.iconduck.com/assets.00/history-icon-2048x1863-258qellh.png" /><span>History</span></button>
@@ -54,6 +57,17 @@ const Sidebar = () => {
             <div className="">copyrights</div>
         </div>
     )
+    if(isSidebarOpen) return (
+        <div className="flex flex-col items-center">
+            <Link to='/' >
+            <button className="flex flex-col justify-center items-center gap-1 h-20 w-16 hover:bg-slate-100 hover:rounded-lg"><img className="w-4" alt="home" src="https://i.pinimg.com/564x/ed/bc/bb/edbcbb66b41eb9570c7b2eeb011b7eb8.jpg" /><span className="text-xs">Home</span></button>
+            </Link>
+            
+            <button className="flex flex-col justify-center items-center gap-1 h-20 w-16 hover:bg-slate-100 hover:rounded-lg"><img className="w-4" alt="shorts" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHvfNPT_G_NuKyV_RyyiTGqOtp3OBZxme25A&s" /><span className="text-xs">Shorts</span></button>
+            <button className="flex flex-col justify-center items-center gap-1 h-20 w-auto hover:bg-slate-100 hover:rounded-lg"><img className="w-4" alt="subscription" src="https://cdn.iconscout.com/icon/free/png-256/free-subscriptions-1780185-1513025.png" /><span className="text-xs">Subscriptions</span></button>
+            <button className="flex flex-col justify-center items-center gap-1 h-20 w-16 hover:bg-slate-100 hover:rounded-lg"><img className="w-4" alt="you" src="https://a0.anyrgb.com/pngimg/1376/154/youtube-play-button-8k-resolution-youtuber-youtube-blog-video-logos-triangle-rectangle-black.png"/><span className="text-xs">You</span></button>
+        </div>
+    );
 }
 
 export default Sidebar;

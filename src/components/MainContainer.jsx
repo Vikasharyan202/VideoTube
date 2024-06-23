@@ -1,8 +1,12 @@
+import ButtonList from "./ButtonList";
+import VideoContainer from "./VideoContainer";
 
 const MainContainer = () => {
+    
     return(
-        <div className="w-[calc(100%-13rem)] h-auto border border-purple-500 ">
-            <p>MainContainer</p>
+        <div className="w-full border border-purple-500 x-10">
+            <ButtonList />
+            <VideoContainer />
         </div>
     )
 }
