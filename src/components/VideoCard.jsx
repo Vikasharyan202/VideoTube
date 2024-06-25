@@ -15,9 +15,9 @@ const VideoCard = ({video}) => {
         <div className="flex gap-2">
           <img className="w-10 h-10 rounded-full border" alt="logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtuphMb4mq-EcVWhMVT8FCkv5dqZGgvn_QiA&s" />
           <div>
-            <p className="font-bold mb-2 text-gray-700">{title.slice(0, 40)}</p>
-            <p>{channelTitle}</p>       
-            <p>{(Math.floor((statistics.viewCount/1000000)*10)/10)} M Views </p>
+            <p className="font-bold mb-2 text-gray-600">{title.slice(0, 40)}</p>
+            <p className="text-sm text-gray-500">{channelTitle}</p>       
+            <p className="text-sm text-gray-500">{(statistics.viewCount >= 1000000)?((statistics.viewCount/1000000).toFixed(1)+"M views"):((statistics.viewCount/1000).toFixed(0))+"K views"} </p>
           </div>         
         </div>     
     </div>
